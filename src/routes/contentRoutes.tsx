@@ -1,9 +1,10 @@
 import React, { lazy } from 'react';
-import { dashboardPagesMenu, demoPagesMenu, pageLayoutTypesPagesMenu } from '../menu';
+import { dashboardPagesMenu, demoPagesMenu, pageLayoutTypesPagesMenu, myBiodata } from '../menu';
 import Login from '../pages/presentation/auth/Login';
 
 const LANDING = {
 	DASHBOARD: lazy(() => import('../pages/presentation/dashboard/DashboardPage')),
+	BIODATA: lazy(() => import('../pages/presentation/biodata/Biodata')),
 };
 const AUTH = {
 	PAGE_404: lazy(() => import('../pages/presentation/auth/Page404')),
@@ -25,6 +26,10 @@ const presentation = [
 	{
 		path: dashboardPagesMenu.dashboard.path,
 		element: <LANDING.DASHBOARD />,
+	},
+	{
+		path: myBiodata.biodata.path,
+		element: <LANDING.BIODATA />,
 	},
 	{
 		path: demoPagesMenu.page404.path,

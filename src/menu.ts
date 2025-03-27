@@ -30,6 +30,16 @@ export const summaryPageTopMenu = {
 	},
 };
 
+export const myBiodata = {
+	biodata: {
+		id: 'biodata',
+		text: 'Biodata',
+		path: '/biodata',
+		icon: 'AddAPhoto',
+		subMenu: null,
+	},
+};
+
 export const dashboardPagesMenu = {
 	dashboard: {
 		id: 'dashboard',
