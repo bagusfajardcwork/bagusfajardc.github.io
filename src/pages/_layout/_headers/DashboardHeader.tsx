@@ -48,23 +48,14 @@ const DashboardHeader = () => {
 		<Header>
 			<HeaderLeft>
 				<Popovers
-					title='DashboardHeader.tsx'
-					desc={<code>src/pages/_layout/_headers/DashboardHeader.tsx</code>}>
-					HeaderLeft
+					desc={<code>yuk kenal lebih dekat</code>}>
+					Curriculum Vitae
 				</Popovers>
-				<code>DashboardHeader.tsx</code>
+				<code>bagusfajardc</code>
 			</HeaderLeft>
 
 			<HeaderRight>
 				<div className='row g-3 align-items-center'>
-					<div className='col-auto'>
-						<Popovers
-							title='DashboardHeader.tsx'
-							desc={<code>src/pages/_layout/_headers/DashboardHeader.tsx</code>}>
-							HeaderRight
-						</Popovers>
-						<code className='ps-3'>DashboardHeader.tsx</code>
-					</div>
 					{/* Dark Mode */}
 					<div className='col-auto'>
 						<Popovers trigger='hover' desc='Dark / Light mode'>
@@ -82,46 +73,6 @@ const DashboardHeader = () => {
 								/>
 							</Button>
 						</Popovers>
-					</div>
-					{/* Lang Selector */}
-					<div className='col-auto'>
-						<Dropdown>
-							<DropdownToggle hasIcon={false}>
-								{typeof getLangWithKey(i18n.language as ILang['key']['lng'])
-									?.icon === 'undefined' ? (
-									<Button
-										// eslint-disable-next-line react/jsx-props-no-spreading
-										{...styledBtn}
-										className='btn-only-icon'
-										aria-label='Change language'
-										data-tour='lang-selector'>
-										<Spinner isSmall inButton='onlyIcon' isGrow />
-									</Button>
-								) : (
-									<Button
-										// eslint-disable-next-line react/jsx-props-no-spreading
-										{...styledBtn}
-										icon={
-											getLangWithKey(i18n.language as ILang['key']['lng'])
-												?.icon
-										}
-										aria-label='Change language'
-										data-tour='lang-selector'
-									/>
-								)}
-							</DropdownToggle>
-							<DropdownMenu isAlignmentEnd data-tour='lang-selector-menu'>
-								{Object.keys(LANG).map((i) => (
-									<DropdownItem key={LANG[i].lng}>
-										<Button
-											icon={LANG[i].icon}
-											onClick={() => changeLanguage(LANG[i].lng)}>
-											{LANG[i].text}
-										</Button>
-									</DropdownItem>
-								))}
-							</DropdownMenu>
-						</Dropdown>
 					</div>
 				</div>
 			</HeaderRight>
