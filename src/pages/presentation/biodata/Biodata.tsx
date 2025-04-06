@@ -8,7 +8,7 @@ import Button from '../../../components/bootstrap/Button';
 import Page from '../../../layout/Page/Page';
 import PageWrapper from '../../../layout/PageWrapper/PageWrapper';
 import Card, {
-	CardActions,
+	// CardActions,
 	CardBody,
 	CardFooter,
 	CardFooterRight,
@@ -24,25 +24,13 @@ import showNotification from '../../../components/extras/showNotification';
 import Icon from '../../../components/icon/Icon';
 import Alert from '../../../components/bootstrap/Alert';
 import Avatar from '../../../components/Avatar';
-// import Progress from '../../../components/bootstrap/Progress';
-
-import Pic from '../../../assets/img/wanna/wanna1.png';
-import Pic2 from '../../../assets/img/wanna/wanna2.png';
-import Pic3 from '../../../assets/img/wanna/wanna3.png';
-import Pic4 from '../../../assets/img/wanna/wanna4.png';
-import Pic5 from '../../../assets/img/wanna/wanna5.png';
-import Pic6 from '../../../assets/img/wanna/wanna6.png';
-import Pic7 from '../../../assets/img/wanna/wanna7.png';
-import Pic8 from '../../../assets/img/wanna/wanna1.png';
 import Modal, { ModalBody, ModalHeader, ModalTitle } from '../../../components/bootstrap/Modal';
 import { myBiodata } from '../../../menu';
-// import WannaImg1 from '../../../assets/img/scene4.png';
-// import WannaImg2 from '../../../assets/img/scene4.png';
-// import WannaImg5 from '../../../assets/img/scene4.png';
-// import WannaImg6 from '../../../assets/img/scene4.png';
 import Carousel from '../../../components/bootstrap/Carousel';
 import CarouselSlide from '../../../components/bootstrap/CarouselSlide';
 import useDarkMode from '../../../hooks/useDarkMode';
+import Accordion, { AccordionItem } from '../../../components/bootstrap/Accordion';
+import '/src/styles/custom/custom-style.css'; // ✅ benar
 
 function downloadFile(fileUrl: string, fileName: string) {
 	const link = document.createElement('a');
@@ -53,11 +41,14 @@ function downloadFile(fileUrl: string, fileName: string) {
 	document.body.removeChild(link);
 }
 
+const user = userData.user;
+const biodataItem = userData.biodata;
+const pendidikan = userData.pendidikan;
+const pengalamankerja = userData.pengalamankerja;
 
 const Biodata = () => {
 	const { darkModeStatus } = useDarkMode();
 
-	// const navigate = useNavigate();
 	const formik = useFormik({
 		initialValues: {
 			formPrefix: 'Prof.',
@@ -87,146 +78,62 @@ const Biodata = () => {
 		},
 	});
 	const [ref, { height }] = useMeasure<HTMLDivElement>();
-
-	const colors = ['primary', 'secondary', 'success', 'info', 'warning', 'danger', 'dark'];
 	const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
-	const [gallerySeeAll, setGallerySeeAll] = useState(false);
 
-	const images: { id: string; img: string }[] = [
-		{ id: 'Pic', img: Pic },
-		{ id: 'Pic2', img: Pic2 },
-		{ id: 'Pic3', img: Pic3 },
-		{ id: 'Pic4', img: Pic4 },
-		{ id: 'Pic5', img: Pic5 },
-		{ id: 'Pic6', img: Pic6 },
-		{ id: 'Pic7', img: Pic7 },
-		{ id: 'Pic8', img: Pic8 },
-	];
-
-	const GALLERY = (
-		<div className='row g-4'>
-			{images.map((item, index) => (
-				<div key={item.id} className='col-xxl-2 col-lg-3 col-md-6'>
-					<button
-						type='button'
-						onClick={() => setSelectedImage(item.img)}
-						className={classNames(
-							'ratio ratio-1x1',
-							'rounded-2',
-							'border-0',
-							`bg-l${darkModeStatus ? 'o25' : '25'}-${colors[index % 7]}`,
-							`bg-l${darkModeStatus ? 'o50' : '10'}-${colors[index % 7]}-hover`,
-						)}>
-						<img
-							src={item.img}
-							alt={item.id}
-							width='100%'
-							height='auto'
-							className='object-fit-contain p-4'
-						/>
-					</button>
+	const BIODATA = (
+		<div className='row g-5 align-content-center'>
+			{biodataItem.map((item, index) => (
+				<div className='col-6'>
+					<div className='d-flex align-items-center'>
+						<div className='flex-shrink-0'>
+							<Icon icon={item.icon} size='3x' color={darkModeStatus ? 'warning' : 'dark'} />
+						</div>
+						<div className='flex-grow-1 ms-3'>
+							<div className='text-muted'>
+								{item.judul}
+							</div>
+							<div className='fw-bold fs-5 mb-0'>
+								{item.deskripsi}
+							</div>
+						</div>
+					</div>
 				</div>
 			))}
 		</div>
 	);
-	const BIODATA = (
-		<div className='row g-5'>
-			<div className='col-xxl-6 col-xl-6'>
-				<div className='row g-3'>
-					<div className='col-sm-12'>
-						<div className='d-flex align-items-center'>
-							<div className='flex-shrink-0'>
-								<Icon icon='DriveFileRenameOutline' size='3x' color='info' />
-							</div>
-							<div className='flex-grow-1 ms-3'>
-								<div className='text-muted'>
-									Nama Lengkap
+
+	const PENGALAMANKERJA = (
+		<div className='row g-4'>
+			<Accordion>
+				{pengalamankerja.map((item, index) => (
+					<AccordionItem
+						key={item.id}
+						id={`accor3-color-${item.id}`}
+						title={
+							<div className="d-flex flex-row justify-content-between align-items-center w-25">
+								<div>
+									{item.posisi} - {item.lokasi}
 								</div>
-								<div className='fw-bold fs-5 mb-0'>
-									{`${userData.user.surename}, (${userData.user.nickname})`}
-								</div>
-							</div>
-						</div>
-					</div>
-					<div className='col-sm-12'>
-						<div className='d-flex align-items-center'>
-							<div className='flex-shrink-0'>
-								<Icon icon='DateRange' size='3x' color='info' />
-							</div>
-							<div className='flex-grow-1 ms-3'>
-								<div className='text-muted'>
-									Tempat,Tgl. Lahir
-								</div>
-								<div className='fw-bold fs-5 mb-0'>
-									{`${userData.user.birtplace  }, ${  userData.user.birthday  } / ${  userData.user.age  } tahun` }
+								<div>
+									{item.active && (
+										<>
+											<Icon className='blink' icon="CheckCircleOutline" size="2x" color={darkModeStatus ? 'warning' : 'success'} />
+										</>
+									)}
 								</div>
 							</div>
+						}
+						icon={item.icon}
+						overWriteColor={item.warna}>
+						<p className='fw-bold fst-italic'><Icon className='mx-2' icon="DateRange" size="1x" color={item.warna} /> {item.tanggal}</p>
+						<div>
+							{item.detail.map((desc, index) => (
+								<span className='fw-medium fs-5'> {`${index + 1}. ${desc.deskripsi}`} <br/> </span>
+							))}
 						</div>
-					</div>
-					<div className='col-sm-12'>
-						<div className='d-flex align-items-center'>
-							<div className='flex-shrink-0'>
-								<Icon icon='Transgender' size='3x' color='info' />
-							</div>
-							<div className='flex-grow-1 ms-3'>
-								<div className='text-muted'>
-									Jenis Kelamin
-								</div>
-								<div className='fw-bold fs-5 mb-0'>
-									{userData.user.gender }
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div className='col-xxl-6 col-xl-6'>
-				<div className='col-sm-12'>
-					<div className='d-flex align-items-center'>
-						<div className='flex-shrink-0'>
-							<Icon icon='EditLocation' size='3x' color='info' />
-						</div>
-						<div className='flex-grow-1 ms-3'>
-							<div className='text-muted'>
-								Alamat
-							</div>
-							<div className='fw-bold fs-5 mb-0'>
-								{userData.user.address}
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className='col-sm-12'>
-					<div className='d-flex align-items-center'>
-						<div className='flex-shrink-0'>
-							<Icon icon='Mail' size='3x' color='info' />
-						</div>
-						<div className='flex-grow-1 ms-3'>
-							<div className='text-muted'>
-								Email
-							</div>
-							<div className='fw-bold fs-5 mb-0'>
-								{userData.user.email}
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className='col-sm-12'>
-					<div className='d-flex align-items-center'>
-						<div className='flex-shrink-0'>
-							<Icon icon='PhoneAndroid' size='3x' color='info' />
-						</div>
-						<div className='flex-grow-1 ms-3'>
-							<div className='text-muted'>
-								Whatsapp
-							</div>
-							<div className='fw-bold fs-5 mb-0'>
-								{userData.user.handphone}
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+					</AccordionItem>
+				))}
+			</Accordion>
 		</div>
 	);
 
@@ -242,16 +149,17 @@ const Biodata = () => {
 										<div className='d-flex align-items-center'>
 											<div className='flex-shrink-0'>
 												<Avatar
-													srcSet={userData.user.src}
-													src={userData.user.src}
+													srcSet={user.src}
+													src={user.src}
 													className='rounded-circle'
+													color='dark'
 												/>
 											</div>
 											<div className='flex-grow-1 ms-3'>
 												<div className='h2 fw-bold'>
-													{userData.user.surename || '-'}
+													{user.surename || '-'}
 												</div>
-												<div className={`${darkModeStatus ? 'text-light' : 'text-muted'} h5`}>{ userData.user.position }</div>
+												<div className={`${darkModeStatus ? 'text-light' : 'text-muted'} h5`}>{ user.position }</div>
 											</div>
 										</div>
 									</div>
@@ -260,12 +168,11 @@ const Biodata = () => {
 											<div className='col-12'>
 												<div className='d-flex align-items-center'>
 													<div className='flex-shrink-0'>
-														<Icon icon='Mail' size='3x' color='info' />
+														<Icon icon='Mail' size='3x' color='danger' />
 													</div>
 													<div className='flex-grow-1 ms-3'>
 														<div className='fw-bold fs-5 mb-0'>
-															{userData.user.email ||
-																'-'}
+															{user.email || '-'}
 														</div>
 														<div className='text-muted'>
 															Email
@@ -284,7 +191,7 @@ const Biodata = () => {
 													</div>
 													<div className='flex-grow-1 ms-3'>
 														<div className='fw-bold fs-5 mb-0'>
-															{userData.user.handphone || '-'}
+															{user.handphone || '-'}
 														</div>
 														<div className='text-muted'>No. Handphone (Whatsapp)</div>
 													</div>
@@ -298,7 +205,7 @@ const Biodata = () => {
 						<Card>
 							<CardHeader>
 								<CardLabel>
-									<CardTitle>Get In Touch !</CardTitle>
+									<CardTitle className={`${darkModeStatus ? 'text-warning' : 'text-dark'}`}>Get In Touch !</CardTitle>
 								</CardLabel>
 							</CardHeader>
 							<CardBody>
@@ -306,7 +213,7 @@ const Biodata = () => {
 									Halo saya <span className='fst-italic fw-bold'>Bagus Fajar Dwicahyo</span> bisa panggil saya <span className='fst-italic fw-bold'>Bagus</span>. <br/>
 									Saya sudah beberapa tahun menjadi programmer baik <span className='fst-italic fw-bold'>backend</span> maupun  <span className='fst-italic fw-bold'>frontend. </span> <br/>
 									Tetapi saat ini lebih terfokus untuk pengembangan disisi tampilannya (frontend).
-									Saya juga biasa membuat <span className='fst-italic fw-bold'>query (MySQL / PostgreSQL)</span> untuk kebutuhan <span className='fst-italic fw-bold'>reporting</span>
+									Saya juga biasa membuat <span className='fst-italic fw-bold'>query (MySQL / PostgreSQL)</span> untuk kebutuhan <span className='fst-italic fw-bold'>reporting </span>
 									sesuai kebutuhan data yang ingin ditampilkan menggunakan <span className='fst-italic fw-bold'> JasperReport </span> untuk tools yang digunakan.
 								</p>
 								<p className={`${darkModeStatus ? 'text-light' : 'text-primary'} fst-italic`}>
@@ -314,12 +221,47 @@ const Biodata = () => {
 								</p>
 							</CardBody>
 						</Card>
+						<Card>
+							<CardHeader>
+								<CardLabel icon='School' iconColor={darkModeStatus ? 'warning' : 'dark'} className={
+									classNames({
+										'text-dark': darkModeStatus,
+										'text-light': !darkModeStatus,
+									})
+								}>
+									<CardTitle className={`${darkModeStatus ? 'text-warning' : 'text-dark'}`}>Pendidikan</CardTitle>
+								</CardLabel>
+							</CardHeader>
+							<CardBody>
+								<div className="p-4">
+									<div className={`${darkModeStatus ? 'border-warning' : ''} border-start border-2 ps-3`}>
+										{pendidikan.map((item, index) => (
+											<div key={index} className="mb-3">
+												<div className='row align-items-center'>
+													<div className='col-2'>
+														<img src={item.path} style={{ maxWidth: '3rem', maxHeight: '3rem' }} alt="Edukasi" />
+													</div>
+													<div className='col-10'>
+														<div className="d-flex align-items-center">
+															<span className="me-2">{item.icon}</span>
+															<strong>{item.place}</strong>
+														</div>
+														<div>{item.jurusan} <strong>{item.skor ? `, IPK ${  item.skor}` : ''}</strong></div>
+														<div>{item.tanggal}</div>
+													</div>
+												</div>
+											</div>
+										))}
+									</div>
+								</div>
+							</CardBody>
+						</Card>
 					</div>
 					<div className='col-xxl-8 col-xl-6'>
 						<Card
 							className={classNames('shadow-3d-info', 'mb-5', {
-								'bg-lo10-info': darkModeStatus,
-								'bg-l25-info': !darkModeStatus,
+								'bg-warning bg-gradient': darkModeStatus,
+								'bg-dark bg-gradient': !darkModeStatus,
 							})}>
 							<Carousel
 								isHoverPause
@@ -332,18 +274,18 @@ const Biodata = () => {
 											<Icon
 												icon='FileCopy'
 												size='10x'
-												color={darkModeStatus ? 'light' : 'danger'}
+												color={darkModeStatus ? 'dark' : 'warning'}
 											/>
 										</div>
-										<div className='col-6'>
-											<h2>Curriculum Vitae</h2>
-											<p className='lead'>Unduh CV saya :</p>
+										<div className='col-6 text-light'>
+											<h2 className={darkModeStatus ? 'text-dark' : 'text-light'}>Curriculum Vitae</h2>
+											<p className={darkModeStatus ? 'text-dark' : 'text-light'}>Unduh CV saya :</p>
 											<Button
-												color={darkModeStatus ? 'light' : 'dark'}
+												color={darkModeStatus ? 'dark' : 'warning'}
 												icon='Download'
 												hoverShadow='lg'
 												shadow='lg'
-												onClick={() => downloadFile(userData.user.cv, 'CV-BagusFajarDwicahyo.pdf')}
+												onClick={() => downloadFile(user.cv, 'CV-BagusFajarDwicahyo.pdf')}
 											>
 												Unduh
 											</Button>
@@ -352,13 +294,13 @@ const Biodata = () => {
 								</CarouselSlide>
 								<CarouselSlide>
 									<div className='row align-items-center h-100'>
-										<div className='col-6 text-end'>
-											<h2>Halo,</h2>
-											<h5>Selamat datang di halaman Curriculum Vitae saya</h5>
+										<div className='col-6 text-end text-light'>
+											<h2 className={darkModeStatus ? 'text-dark' : 'text-warning'}>Halo,</h2>
+											<h5 className={darkModeStatus ? 'text-dark' : 'text-warning'}>Selamat datang di halaman Curriculum Vitae saya</h5>
 										</div>
 										<div
 											className='col-6 carousel-slide-bg'
-											style={{ backgroundImage: `url(${userData.user.srcGhibli})` }}
+											style={{ backgroundImage: `url(${user.srcGhibli})` }}
 										/>
 									</div>
 								</CarouselSlide>
@@ -366,7 +308,7 @@ const Biodata = () => {
 						</Card>
 						<Card>
 							<CardHeader className={classNames({
-								'bg-light': darkModeStatus,
+								'bg-warning': darkModeStatus,
 								'bg-dark': !darkModeStatus,
 							}, 'bg-gradient')}>
 								<CardLabel icon='VerifiedUser' iconColor={darkModeStatus ? 'dark' : 'light'} className={
@@ -375,26 +317,28 @@ const Biodata = () => {
 										'text-light': !darkModeStatus,
 									})
 								}>
-									<CardTitle>Biodata</CardTitle>
+									<CardTitle className={`${darkModeStatus ? 'text-dark' : 'text-light'}`}>Biodata</CardTitle>
 								</CardLabel>
 							</CardHeader>
 							<CardBody>{BIODATA}</CardBody>
 						</Card>
 						<Card>
-							<CardHeader>
-								<CardLabel icon='PhotoSizeSelectActual' iconColor='info'>
-									<CardTitle>Photos and Videos</CardTitle>
+							<CardHeader className={classNames({
+								'bg-warning': darkModeStatus,
+								'bg-dark': !darkModeStatus,
+							}, 'bg-gradient')}>
+								<CardLabel icon='Work' iconColor={darkModeStatus ? 'dark' : 'light'} className={
+									classNames({
+										'text-dark': darkModeStatus,
+										'text-light': !darkModeStatus,
+									})
+								}>
+									<CardTitle className={`${darkModeStatus ? 'text-dark' : 'text-light'}`}>Pengalaman Kerja</CardTitle>
 								</CardLabel>
-								<CardActions>
-									<Button
-										color='info'
-										isLight
-										onClick={() => setGallerySeeAll(true)}>
-										See All
-									</Button>
-								</CardActions>
 							</CardHeader>
-							<CardBody>{GALLERY}</CardBody>
+							<CardBody>
+								{PENGALAMANKERJA}
+							</CardBody>
 						</Card>
 						<Card hasTab>
 							<CardTabItem id='profile' title='Profile' icon='Contacts'>
@@ -654,16 +598,6 @@ const Biodata = () => {
 					</ModalBody>
 				</Modal>
 
-				<Modal
-					setIsOpen={setGallerySeeAll}
-					isOpen={gallerySeeAll}
-					fullScreen
-					titleId='gallery-full'>
-					<ModalHeader setIsOpen={setGallerySeeAll}>
-						<ModalTitle id='gallery-full'>Gallery</ModalTitle>
-					</ModalHeader>
-					<ModalBody>{GALLERY}</ModalBody>
-				</Modal>
 			</Page>
 		</PageWrapper>
 	);

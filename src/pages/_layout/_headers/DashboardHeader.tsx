@@ -4,15 +4,15 @@ import Header, { HeaderLeft, HeaderRight } from '../../../layout/Header/Header';
 import Popovers from '../../../components/bootstrap/Popovers';
 import Button, { IButtonProps } from '../../../components/bootstrap/Button';
 import useDarkMode from '../../../hooks/useDarkMode';
-import LANG, { getLangWithKey, ILang } from '../../../lang';
-import Dropdown, {
-	DropdownItem,
-	DropdownMenu,
-	DropdownToggle,
-} from '../../../components/bootstrap/Dropdown';
-import showNotification from '../../../components/extras/showNotification';
+// import LANG, { getLangWithKey, ILang } from '../../../lang';
+// import Dropdown, {
+// 	DropdownItem,
+// 	DropdownMenu,
+// 	DropdownToggle,
+// } from '../../../components/bootstrap/Dropdown';
+// import showNotification from '../../../components/extras/showNotification';
 import Icon from '../../../components/icon/Icon';
-import Spinner from '../../../components/bootstrap/Spinner';
+// import Spinner from '../../../components/bootstrap/Spinner';
 
 const DashboardHeader = () => {
 	const { darkModeStatus, setDarkModeStatus } = useDarkMode();
@@ -25,17 +25,17 @@ const DashboardHeader = () => {
 
 	const { i18n } = useTranslation();
 
-	const changeLanguage = (lng: ILang['key']['lng']) => {
-		i18n.changeLanguage(lng).then(() =>
-			showNotification(
-				<span className='d-flex align-items-center'>
-					<Icon icon={getLangWithKey(lng)?.icon} size='lg' className='me-1' />
-					<span>{`Language changed to ${getLangWithKey(lng)?.text}`}</span>
-				</span>,
-				'You updated the language of the site. (Only "Aside" was prepared as an example.)',
-			),
-		);
-	};
+	// const changeLanguage = (lng: ILang['key']['lng']) => {
+	// 	i18n.changeLanguage(lng).then(() =>
+	// 		showNotification(
+	// 			<span className='d-flex align-items-center'>
+	// 				<Icon icon={getLangWithKey(lng)?.icon} size='lg' className='me-1' />
+	// 				<span>{`Language changed to ${getLangWithKey(lng)?.text}`}</span>
+	// 			</span>,
+	// 			'You updated the language of the site. (Only "Aside" was prepared as an example.)',
+	// 		),
+	// 	);
+	// };
 
 	/**
 	 * Language attribute
