@@ -68,6 +68,14 @@ type PengalamanKerjaItem = {
 	detail: any;
 };
 
+type SertifikasiItem = {
+	id: string;
+	judul: string;
+	icon: string;
+	deskripsi: string;
+	tanggal: string;
+};
+
 const profile: ProfileItem[] = {
 	surename: 'Bagus Fajar Dwicahyo',
 	frontname: 'Bagus',
@@ -159,12 +167,22 @@ const pengalamankerjaItem: PengalamanKerjaItem[] = [
 	}
 ];
 
+const sertifikasiItem: SertifikasiItem[] = [
+	{ id: "srt1", judul: "Dicoding Indonesia", icon: "TipsAndUpdates", deskripsi: "Dasar Pemrograman Web", tanggal: "April 2023" },
+	{ id: "srt2", judul: "Digitalent Kominfo", icon: "TipsAndUpdates", deskripsi: "Konfigurasi Dasar Kemampuan Komputer", tanggal: "Juni 2020" },
+	{ id: "srt3", judul: "PT. Multi Inti Digital Bisnis", icon: "TipsAndUpdates", deskripsi: "ERP Next Functional Program", tanggal: "Feb 2020" },
+	{ id: "srt4", judul: "Database Administration Fundamentals", icon: "TipsAndUpdates", deskripsi: "Dasar-dasar Query", tanggal: "Oktober 2019" },
+	{ id: "srt5", judul: "Fundamental DBMS", icon: "TipsAndUpdates", deskripsi: "Fundamental (dasar-dasar) DBMS", tanggal: "Agustus 2016" },
+	// { id: "", judul: "", icon: "", deskripsi: "", tanggal: "" },
+];
+
 
 const data = {
 	user: profile,
 	pendidikan: edukasi,
 	biodata: biodataItem,
 	pengalamankerja: pengalamankerjaItem,
+	sertifikasi: sertifikasiItem,
 };
 
 export default data;
