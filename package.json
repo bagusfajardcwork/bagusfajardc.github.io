@@ -2,6 +2,7 @@
 	"name": "facit",
 	"version": "4.3.4",
 	"private": true,
+	"homepage": "https://bagusfajardcwork.github.io/bagusfajardc-cv",
 	"scripts": {
 		"predeploy": "bun run build",
 		"deploy": "gh-pages -d dist",
